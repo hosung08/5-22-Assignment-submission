@@ -1,0 +1,176 @@
+//스택
+#include <stdio.h>
+#include <stdlib.h>
+
+#define STACK_SIZE 100
+
+char stack[STACK_SIZE];
+int top = -1;
+
+void push(char input) {
+    if (top >= (STACK_SIZE - 1)) {
+        printf("Stack is full\n");
+    } else {
+        stack[++top] = input;
+    }
+}
+
+void print(void) {
+    if (top == -1) {
+        printf("Stack is empty\n");
+    } else {
+        for (int i = 0; i <= top; i++) {
+            printf("%c ", stack[i]);
+        }
+        printf("\n");
+    }
+}
+
+char pop(void) {
+    if (top == -1) {
+        printf("Stack is empty\n");
+        return '\0'; 
+    } else {
+        return stack[top--];
+    }
+}
+
+char peek(void) {
+    if (top == -1) {
+        printf("Stack is empty\n");
+        return '\0'; 
+    } else {
+        return stack[top];
+    }
+}
+
+void del(void) {
+    top = -1;
+}
+
+int isEmpty(void) {
+    return top == -1;
+}
+
+int getSize(void) {
+    return top + 1;
+}
+
+int main(void) {
+    int sel = 1;
+    char ch;
+
+    while (sel != 0) {
+        system("cls");
+        printf("<Menu>\n");
+        printf("0. quit\n");
+        printf("1. print\n");
+        printf("2. push\n");
+        printf("3. pop\n");
+        printf("4. peek\n");
+        printf("5. del\n");
+        printf("6. isEmpty\n");
+        printf("7. getSize\n");
+        printf("-------------\n");
+
+        scanf("%d", &sel);
+        getchar(); 
+        switch (sel) {
+            case 1:
+                print();
+                break;
+            case 2:
+                printf("Enter a character to push: ");
+                scanf("%c", &ch);
+                push(ch);
+                break;
+            case 3:
+                printf("Pop data: %c\n", pop());
+                break;
+            case 4:
+                printf("Top data: %c\n", peek());
+                break;
+            case 5:
+                del();
+                printf("Stack cleared\n");
+                break;
+            case 6:
+                if (isEmpty())
+                    printf("State: Empty!\n");
+                else 
+                    printf("State: Not Empty!\n");
+                break;
+            case 7:
+                printf("Size: %d\n", getSize());
+                break;
+        }
+        getch(); 
+    }
+    return 0;
+}
+사실 이게 조금 이상한데 주말동안 더 수정해서 다시 오리겟습니다.
+
+
+//큐
+#include <stdio.h>
+
+#define MAX_CAPACITY 100
+
+int circularQueue[MAX_CAPACITY];
+int queueFront = 0; 
+int queueRear = -1;
+
+int isQueueEmpty() {
+    return queueRear < queueFront;
+}
+
+int isQueueFull() {
+    return queueRear == MAX_CAPACITY - 1;
+}
+
+void enqueueData(int data) {
+    if (isQueueFull()) {
+        printf("큐가 가득 찼습니다.\n");
+    } else {
+        circularQueue[++queueRear] = data;
+    }
+}
+
+void dequeueData() {
+    if (isQueueEmpty()) {
+        printf("큐가 비어 있습니다.\n");
+    } else {
+        printf("%d\n", circularQueue[queueFront++]);
+    }
+}
+
+int main() {
+    
+    enqueueData(1);
+    enqueueData(2);
+    enqueueData(3);
+    dequeueData(); 
+    dequeueData(); 
+    enqueueData(4);
+    dequeueData(); 
+    dequeueData(); 
+    dequeueData(); 
+    
+    return 0;
+}
+
+//백터(이론)
+백터는 동일한 타입의 요소들을 연속적으로 저장하는 컨테이너 하고 할 수 있습니다.
+배열과 아주아주아주 비슷하지만 벡터는 크기가 동적으로 변할 수 있다는 점에서 차이가 있다고 볼 수 있습니다.
+쉽게 말하자면 배열은 한번 값을 지정해주면 값을 바꿀수 없지만 
+벡터를 쓴다면 값을 자유자제로 바꿀 수 있다는 점에서 차이가 있습니다.
+즉, 프로그램 실행 도중에 요소를 추가하거나 제거하여 벡터의 크기를 변경할 수 있습니다.
+
+단일링크드리스트(이론)
+단일 링크드 리스트는 데이터를 저장하는 기본적인 데이터 구조중 하나라고 할수 있습니다.
+각각의 데이터를 노드라고 부르고, 이 노드들은 서로 연결되어 잇습니다. 
+각 노드는 데이터와 다음 노드를 가리키는 포인터를 포함하고 데이터 요소들이 메모리 상에서 연속적으로 
+위치하지 않고 각 요소가 다음 요소의 위치를 가리키는 방식으로 연결되어 있습니다
+
+
+
